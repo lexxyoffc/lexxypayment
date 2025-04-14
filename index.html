@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Payment Lexxy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #777;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      padding: 15px;
+      max-width: 280px;
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .location-icon {
+      font-size: 18px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .location-text {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid red;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    body, button, input, textarea {
+      font-family: 'Teko', sans-serif;
+    }
+
+    .verified-icon {
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+
+    .qris {
+      width: 100%;
+      border: 2px solid red;
+      border-radius: 10px;
+    }
+
+    .whitelist-btn {
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: 2px solid red;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s ease;
+     box-shadow: 0 0 5px red;
+    }
+
+    .whitelist-btn:hover {
+      background-color: rgba(255, 0, 0, 0.1);
+      box-shadow: 0 0 10px red;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.4);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .button:hover::before {
+      left: 125%;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .half-button {
+      width: 48%;
+    }
+
+    .gopay-center {
+      width: 60%;
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .social-buttons .button {
+      font-size: 12px;
+      padding: 7px;
+    }
+
+    .icon {
+      width: 16px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Foto Profil" class="profile-img" />
+
+    <div class="name">
+      LexxyOffc
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" alt="verified" class="verified-icon" />
+    </div>
+
+    <img src="qris.png" alt="QRIS" class="qris" />
+    <button class="whitelist-btn" onclick="downloadQR()">Unduh QRIS</button>
+
+    <div class="row">
+      <button class="whitelist-btn" onclick="copyText('087866712703')"/>DANA
+      </button>
+      <button class="whitelist-btn" onclick="copyText('087866712703')"/>OVO
+      </button>
+    </div>
+
+    <button class="whitelist-btn" onclick="copyText('087866712703')"/>Gopay
+    </button>
+
+        <div class="social-buttons">
+      <button class="whitelist-btn" onclick="location.href='https://wa.me/6287866712703'">WhatsApp LexxyOffc</button>
+      <button class="whitelist-btn" onclick="location.href='https://t.me/LexxyOffc'">Telegram LexxyOffc</button>
+      <button class="whitelist-btn" onclick="location.href='https://whatsapp.com/channel/0029VaxNkvEHrDZbdd74FZ30'">Channel Testimoni</button>
+    </div>
+
+      <div class="location">
+  <span class="location-icon">📍</span>
+  <span class="location-text">Indonesia, Jawa Timur, Mojokerto</span>
+    </div>
+  </div>
+
+  <script>
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () {
+          alert("Nomor disalin: " + text);
+        }).catch(function () {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "absolute";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        alert("Nomor disalin: " + text);
+      } catch (err) {
+        alert("Gagal menyalin nomor.");
+      }
+      document.body.removeChild(textarea);
+    }
+  </script>
+
+  <script>
+    function downloadQR() {
+      const qrisImage = "qris.png"; 
+      const link = document.createElement("a");
+      link.href = qrisImage;
+      link.download = "QRIS_Lexxy.png"; // Nama file saat diunduh
+      link.onerror = function () {
+        alert("Gagal mengunduh QRIS. Pastikan file tersedia.");
+      };
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
